@@ -9,3 +9,17 @@ C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.csproj.GenerateResou
 C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.csproj.CoreCompileInputs.cache
 C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.exe
 C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.pdb
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\bin\Debug\GameWorld.exe.config
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\bin\Debug\GameWorld.exe
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\bin\Debug\GameWorld.pdb
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.csproj.AssemblyReference.cache
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.csproj.SuggestedBindingRedirects.cache
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.GameForm.resources
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.Properties.Resources.resources
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.csproj.GenerateResource.cache
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.csproj.CoreCompileInputs.cache
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.exe
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.pdb
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Kirill\Desktop\vilks\GameWorld\WordsGame\obj\Debug\GameWorld.csproj.CopyComplete
