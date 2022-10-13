@@ -2,7 +2,7 @@
 
 namespace GameWorld
 {
-    partial class Form1
+    partial class GameForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,9 +29,9 @@ namespace GameWorld
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         
-        private void CreateTable()
+        private void CreateTable(int len, int attempt)
         {
-            int x = 5, y = 4;
+            int x = len, y = attempt;
             // create tabel
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -43,7 +43,7 @@ namespace GameWorld
                 for (int j = 0; j < y; j++)
                 {
                     labels[i, j] = new Label();
-                    labels[i, j].Text = (i * j).ToString();
+                    labels[i, j].Text = j + 1 != y ? "_ _" : "*" ;
                     labels[i, j].Name = "label" + i.ToString() + j.ToString();
                     labels[i, j].Location = new System.Drawing.Point(0, 0);
                     labels[i, j].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -81,7 +81,7 @@ namespace GameWorld
             this.tableLayoutPanel1.PerformLayout();
             this.Controls.Add(this.tableLayoutPanel1);
         }
-        private void InitializeComponent()
+        private void InitializeComponent(int len, int attempt)
         {
             this.SuspendLayout();
             // 
@@ -95,7 +95,7 @@ namespace GameWorld
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Form1";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-            CreateTable();
+            CreateTable(len, attempt);
             this.ResumeLayout(false);
 
         }
