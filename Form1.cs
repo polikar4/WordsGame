@@ -64,7 +64,6 @@ namespace GameWorld
 
             var rand = new Random();
             hidden_word = worls.words[rand.Next(worls.words.Count)];
-            hidden_word = "profit";
         }
 
         public static void KeyUp(int key)

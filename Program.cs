@@ -14,9 +14,10 @@ namespace GameWorld
         [STAThread]
         static void Main()
         {
+            var rand = new Random();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameForm(6,6));
+            Application.Run(new GameForm(rand.Next(4, 8),6));
         }
     }
 }
