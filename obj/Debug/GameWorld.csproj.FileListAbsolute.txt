@@ -1,0 +1,11 @@
+C:\Users\Kirill\Desktop\vilks\GameWorld\bin\Debug\GameWorld.exe.config
+C:\Users\Kirill\Desktop\vilks\GameWorld\bin\Debug\GameWorld.exe
+C:\Users\Kirill\Desktop\vilks\GameWorld\bin\Debug\GameWorld.pdb
+C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.csproj.AssemblyReference.cache
+C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.csproj.SuggestedBindingRedirects.cache
+C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.Form1.resources
+C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.Properties.Resources.resources
+C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.csproj.GenerateResource.cache
+C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.csproj.CoreCompileInputs.cache
+C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.exe
+C:\Users\Kirill\Desktop\vilks\GameWorld\obj\Debug\GameWorld.pdb
