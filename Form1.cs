@@ -22,9 +22,9 @@ namespace GameWorld
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            GameLogic.KeyUp(e.KeyValue);
+            GameLogic.KeyUp(e.KeyValue)
         }
-    }
+    } 
 
     public class Worls // class to json (json hawe all words fix len)
     {
