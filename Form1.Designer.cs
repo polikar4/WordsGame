@@ -49,6 +49,7 @@ namespace GameWorld
                     labels[i, j].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 }
             }
+            labels[0, 0].Text = " | ";
             // params 
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.ColumnCount = x;

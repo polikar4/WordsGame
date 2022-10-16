@@ -17,12 +17,12 @@ namespace GameWorld
         public GameForm(int len, int attempt)
         {
             InitializeComponent(len, attempt);
-            GameLogic.Construkt(tableLayoutPanel1,len, attempt);
+            GameLogic.Construkt(this, tableLayoutPanel1, len ,attempt);
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            GameLogic.KeyUp(e.KeyValue)
+            GameLogic.KeyUp(e.KeyCode);
         }
     } 
 
@@ -45,13 +45,16 @@ namespace GameWorld
 
     public static class GameLogic //singletone? hvhvhvhvh. NO
     {
-        static int x, y; // size table
+        static int x, y;                 // size table
         static int now_x = 1, now_y = 1; // now posision 
         static TableLayoutPanel table;
-        static Worls worls;
+        static Worls worls;              //class hawe all words 
         static string hidden_word;
-        public static void Construkt(TableLayoutPanel _table,int len, int attempt)
+        static Control elem = null;
+        static GameForm form;
+        public static void Construkt(GameForm _form, TableLayoutPanel _table, int len, int attempt)
         {
+            form = _form;
             table = _table;
             x = len;
             y = attempt;
@@ -61,85 +64,114 @@ namespace GameWorld
             string json = sw.ReadToEnd();
             sw.Close();
             worls = JsonConvert.DeserializeObject<Worls>(json);
-
+            // random word in all words
             var rand = new Random();
             hidden_word = worls.words[rand.Next(worls.words.Count)];
         }
 
-        public static void KeyUp(int key)
+        public static void KeyUp(Keys key)
         {
-            if(key == 8 && now_x > 1)  // backspace press
-            {
-                now_x--;
-                Control c = table.Controls.Find("label" + (now_x - 1).ToString() + (now_y - 1).ToString(), true)[0];
-                c.Text = "_ _";
-            }
-            else if(now_x <= x && key >= 65 && key <= 90) // press any letter
-            {
-                Control c = table.Controls.Find("label" + (now_x-1).ToString() + (now_y-1).ToString(), true)[0];
-                c.Text = ((char)key).ToString();
-                now_x++;
-            }
+            if (key == Keys.Back && now_x > 1)  // backspace press
+                DeletedLastChar();
+            else if (now_x <= x && (int)key >= 65 && (int)key <= 90) // press any letter
+                EnterChar((int)key);
+            else if (now_x > x && key == Keys.Space && now_y < y) // press spase to enter word
+                EnterSpace();
 
-            else if(now_x > x && key == 32 && now_y < y) // press spase to enter word
+            if (now_y == y) // if u spend all attempt
             {
-                string word = "";
-                for(int i = 0; i < x; i++)
+                for (int i = 0; i < x; i++)  // open hidden word in last string  
                 {
-                    Control c = table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0];
-                    word += c.Text;
-                    word = word.ToLower();
-                    
+                    table.Controls.Find("label" + (i).ToString() + (y - 1).ToString(), true)[0]
+                            .Text = (hidden_word[i]).ToString().ToUpper();
                 }
-                if (worls.TruWord(word))
-                {
-                    if (word == hidden_word)
-                    {
-                        for (int i = 0; i < x; i++)
-                        {
-                            table.Controls.Find("label" + (i).ToString() + (y - 1).ToString(), true)[0]
-                                    .Text = (hidden_word[i]).ToString().ToUpper();
-                        }
-                    }
-
-                    string tmp = hidden_word;
-                    int count = 0;
-                    for (int i = 0; i < x; i++)
-                    {
-                        if (word[i] == hidden_word[i])
-                        {
-                            table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0]
-                                .BackColor = Color.Green;
-
-                            tmp = tmp.Remove(i - count,1);
-                            count++;
-                        }
-                    }
-
-                    for (int i = 0; i < x; i++)
-                    {
-                        var e = table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0];
-                        if (e.BackColor != Color.Green) 
-                        { 
-                            for(int j = 0; j < tmp.Length; j++)
-                            {
-                                if (tmp[j].ToString() == e.Text.ToLower())
-                                {
-                                    e.BackColor = Color.Yellow;
-                                    tmp = tmp.Remove(j);
-                                    j--;
-                                }
-                            }
-                        }
-                    }
-
-
-                    now_y++;
-                    now_x = 1;
-                }
+                EndGame("U lose");
             }
-
+                
         }
+        private static void EndGame(string text)
+        {
+            MessageBox.Show(text, text, MessageBoxButtons.OK);
+            form.Close();
+        }
+        private static void DeletedLastChar()
+        {
+            if (now_x <= x)
+            {
+                elem = table.Controls.Find("label" + (now_x - 1).ToString() + (now_y - 1).ToString(), true)[0];
+                elem.Text = "_ _";
+            }
+            now_x--;
+            elem = table.Controls.Find("label" + (now_x - 1).ToString() + (now_y - 1).ToString(), true)[0];
+            elem.Text = " / ";
+        }
+        private static void EnterChar(int key)
+        {
+            elem = table.Controls.Find("label" + (now_x - 1).ToString() + (now_y - 1).ToString(), true)[0];
+            elem.Text = ((char)key).ToString();
+            now_x++;
+            if (now_x <= x)
+            {
+                elem = table.Controls.Find("label" + (now_x - 1).ToString() + (now_y - 1).ToString(), true)[0];
+                elem.Text = " / ";
+            }
+        }
+        private static void EnterSpace()
+        {
+            string word = "";
+            for (int i = 0; i < x; i++) // read word in now string
+            {
+                elem = table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0];
+                word += elem.Text.ToLower();
+            }
+            if (!worls.TruWord(word)) // cheak existence word
+                return;
 
+            if (word == hidden_word)
+            {
+                for (int i = 0; i < x; i++)  // open hidden word in last string  
+                {   
+                    table.Controls.Find("label" + (i).ToString() + (y - 1).ToString(), true)[0]
+                            .Text = (hidden_word[i]).ToString().ToUpper();
+                }
+                EndGame("U won");
+            }
+
+            string tmp = hidden_word; 
+            for (int i = 0, count = 0; i < x; i++) // change color green right char position
+            {
+                if (word[i] == hidden_word[i])
+                {
+                    table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0]
+                        .BackColor = Color.Green;
+
+                    tmp = tmp.Remove(i - count, 1);
+                    count++;
+                }
+            }
+
+            for (int i = 0; i < x; i++) // change color yellow right char
+            {
+                elem = table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0];
+                if (elem.BackColor != Color.Green)
+                {
+                    for (int j = 0; j < tmp.Length; j++)
+                    {
+                        if (tmp[j].ToString() == elem.Text.ToLower())
+                        {
+                            elem.BackColor = Color.Yellow;
+                            tmp = tmp.Remove(j);
+                            j--;
+                        }
+                    }
+                }
+            }
+
+            // go to next line and " / " to first char
+            now_y++; 
+            now_x = 1;
+            elem = table.Controls.Find("label" + (now_x - 1).ToString() + (now_y - 1).ToString(), true)[0];
+            elem.Text = " / ";
+        }
     }
 }
