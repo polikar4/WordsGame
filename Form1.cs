@@ -17,12 +17,46 @@ namespace GameWorld
         public GameForm(int len, int attempt)
         {
             InitializeComponent(len, attempt);
-            GameLogic.Construkt(this, tableLayoutPanel1, len ,attempt);
+            GameLogic.Construkt(this, tableLayoutPanel1, len ,attempt, buttons);
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             GameLogic.KeyUp(e.KeyCode);
+
+        }
+
+        private void ClickKeyboard(object sender, EventArgs e)
+        {
+            ActiveControl = null;
+            string text = ((Button)sender).Text;
+            if(text.Length == 1)
+                GameLogic.KeyUp((Keys)text[0]);
+            else if(text == "Space")
+                GameLogic.KeyUp(Keys.Space);
+            else if (text == "<-")
+                GameLogic.KeyUp(Keys.Back);
+        }
+        private void FormResize(object sender, System.EventArgs e)
+        {
+            int[] count_keys_line = new int[] { 10, 9, 7 };
+
+            for (int i = 0; i < 3; i++)
+            {
+                int count = count_keys_line[i];
+                for (int j = 0; j < count_keys_line.Max(); j++)
+                {
+                    if (j >= count)
+                        continue;
+                    buttons[j, i].Size = new System.Drawing.Size(ClientSize.Width / 12, 30);
+                    buttons[j, i].Location = new System.Drawing.Point(ClientSize.Width * j / 12 + i * 30, i * 30 + 300);
+                }
+            }
+            space.Size = new System.Drawing.Size(ClientSize.Width, 30);
+            space.Location = new System.Drawing.Point(0, 390);
+            backspace.Size = new System.Drawing.Size(ClientSize.Width * 2 / 12, 30);
+            backspace.Location = new System.Drawing.Point(ClientSize.Width * 10 / 12, 300);
         }
     } 
 
@@ -52,8 +86,10 @@ namespace GameWorld
         static string hidden_word;
         static Control elem = null;
         static GameForm form;
-        public static void Construkt(GameForm _form, TableLayoutPanel _table, int len, int attempt)
+        static Button[,] buttons;
+        public static void Construkt(GameForm _form, TableLayoutPanel _table, int len, int attempt, Button[,] _buttons)
         {
+            buttons = _buttons;
             form = _form;
             table = _table;
             x = len;
@@ -134,6 +170,14 @@ namespace GameWorld
                     table.Controls.Find("label" + (i).ToString() + (y - 1).ToString(), true)[0]
                             .Text = (hidden_word[i]).ToString().ToUpper();
                 }
+                foreach(var b in buttons)
+                {
+                    foreach(var c in word)
+                    {
+                        if (b != null && b.Text.ToLower()[0] == c)
+                            b.BackColor = Color.Green;
+                    }
+                }
                 EndGame("U won");
             }
 
@@ -145,6 +189,11 @@ namespace GameWorld
                     table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0]
                         .BackColor = Color.Green;
 
+                    foreach (var b in buttons)
+                    {
+                        if (b != null && b.Text.ToLower()[0] == word[i])
+                            b.BackColor = Color.Green;
+                    }
                     tmp = tmp.Remove(i - count, 1);
                     count++;
                 }
@@ -159,6 +208,11 @@ namespace GameWorld
                     {
                         if (tmp[j].ToString() == elem.Text.ToLower())
                         {
+                            foreach (var b in buttons)
+                            {
+                                if (b != null && b.Text.ToLower()[0] == tmp[j])
+                                    b.BackColor = Color.Yellow;
+                            }
                             elem.BackColor = Color.Yellow;
                             tmp = tmp.Remove(j);
                             j--;
