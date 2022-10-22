@@ -12,12 +12,25 @@ namespace GameWorld
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             var rand = new Random();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameForm(rand.Next(4, 4),6));
+            Application.Run(new Menu());
         }
+
+        public static void OpenGameForm(Form form, int len, int count)
+        {
+            form.Hide();
+            GameForm gameForm = new GameForm(len, count);
+            gameForm.Show();
+        }
+
+        public static void OpenMenuForm()
+        {
+
+        }
+        
     }
 }

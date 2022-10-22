@@ -18,7 +18,6 @@ namespace GameWorld
         {
             InitializeComponent(len, attempt);
             GameLogic.Construkt(this, tableLayoutPanel1, len ,attempt, buttons);
-
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -80,7 +79,7 @@ namespace GameWorld
     public static class GameLogic //singletone? hvhvhvhvh. NO
     {
         static int x, y;                 // size table
-        static int now_x = 1, now_y = 1; // now posision 
+        static int now_x, now_y; // now posision 
         static TableLayoutPanel table;
         static Worls worls;              //class hawe all words 
         static string hidden_word;
@@ -89,6 +88,7 @@ namespace GameWorld
         static Button[,] buttons;
         public static void Construkt(GameForm _form, TableLayoutPanel _table, int len, int attempt, Button[,] _buttons)
         {
+            now_x = now_y = 1;
             buttons = _buttons;
             form = _form;
             table = _table;
@@ -128,6 +128,8 @@ namespace GameWorld
         private static void EndGame(string text)
         {
             MessageBox.Show(text, text, MessageBoxButtons.OK);
+            Menu menu = new Menu();
+            menu.Visible = true;
             form.Close();
         }
         private static void DeletedLastChar()
@@ -160,6 +162,7 @@ namespace GameWorld
                 elem = table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0];
                 word += elem.Text.ToLower();
             }
+
             if (!worls.TruWord(word)) // cheak existence word
                 return;
 
@@ -179,6 +182,7 @@ namespace GameWorld
                     }
                 }
                 EndGame("U won");
+                return;
             }
 
             string tmp = hidden_word; 
@@ -186,8 +190,8 @@ namespace GameWorld
             {
                 if (word[i] == hidden_word[i])
                 {
-                    table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0]
-                        .BackColor = Color.Green;
+                    elem = table.Controls.Find("label" + (i).ToString() + (now_y - 1).ToString(), true)[0];
+                    elem.BackColor = Color.Green;
 
                     foreach (var b in buttons)
                     {
