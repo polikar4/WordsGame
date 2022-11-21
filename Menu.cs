@@ -17,7 +17,6 @@ namespace GameWorld
         public Menu()
         {
             InitializeComponent();
-            
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
@@ -49,37 +48,11 @@ namespace GameWorld
                     count = 3;
                     break;
             }
-            Program.OpenGameForm(this, len, count);
+            Program.OpenGameForm(len, count);
         }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void HistoryButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
+            Program.OpenHistoryForm();
         }
     }
 }

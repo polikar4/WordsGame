@@ -86,6 +86,7 @@ namespace GameWorld
         static Control elem = null;
         static GameForm form;
         static Button[,] buttons;
+        static bool game_win;
         public static void Construkt(GameForm _form, TableLayoutPanel _table, int len, int attempt, Button[,] _buttons)
         {
             now_x = now_y = 1;
@@ -121,15 +122,31 @@ namespace GameWorld
                     table.Controls.Find("label" + (i).ToString() + (y - 1).ToString(), true)[0]
                             .Text = (hidden_word[i]).ToString().ToUpper();
                 }
+                game_win = false;
                 EndGame("U lose");
             }
                 
         }
         private static void EndGame(string text)
         {
+            // read all words in table 
+            string[] words = new string[y];
+            for(int j = 0; j < y; j++)
+            {
+                string word = "";
+                for (int i = 0; i < x; i++) // read word in now string
+                {
+                    elem = table.Controls.Find("label" + (i).ToString() + (j).ToString(), true)[0];
+                    word += elem.Text.ToLower();
+                }
+                words[j] = word;
+            }
+
+            // Save result game 
+            SaveResult.Save(words,hidden_word, y,game_win);
+
             MessageBox.Show(text, text, MessageBoxButtons.OK);
-            Menu menu = new Menu();
-            menu.Visible = true;
+            Program.OpenMenuForm();
             form.Close();
         }
         private static void DeletedLastChar()
@@ -181,6 +198,7 @@ namespace GameWorld
                             b.BackColor = Color.Green;
                     }
                 }
+                game_win = true;
                 EndGame("U won");
                 return;
             }

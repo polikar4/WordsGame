@@ -39,6 +39,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.HistoryButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuBindingSource)).BeginInit();
@@ -49,9 +50,10 @@
             this.PlayButton.AllowDrop = true;
             this.PlayButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PlayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PlayButton.Location = new System.Drawing.Point(50, 205);
+            this.PlayButton.Location = new System.Drawing.Point(129, 315);
+            this.PlayButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PlayButton.Name = "PlayButton";
-            this.PlayButton.Size = new System.Drawing.Size(184, 58);
+            this.PlayButton.Size = new System.Drawing.Size(276, 89);
             this.PlayButton.TabIndex = 0;
             this.PlayButton.Text = "Play";
             this.PlayButton.UseVisualStyleBackColor = true;
@@ -71,9 +73,10 @@
             "7",
             "8",
             "Random"});
-            this.LenBox.Location = new System.Drawing.Point(161, 111);
+            this.LenBox.Location = new System.Drawing.Point(237, 171);
+            this.LenBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LenBox.Name = "LenBox";
-            this.LenBox.Size = new System.Drawing.Size(121, 32);
+            this.LenBox.Size = new System.Drawing.Size(180, 41);
             this.LenBox.TabIndex = 1;
             // 
             // label1
@@ -82,12 +85,12 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 113);
+            this.label1.Location = new System.Drawing.Point(-1, 174);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 25);
+            this.label1.Size = new System.Drawing.Size(202, 37);
             this.label1.TabIndex = 2;
             this.label1.Text = "Lenght Word";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -95,9 +98,10 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(20, 149);
+            this.label2.Location = new System.Drawing.Point(25, 229);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 25);
+            this.label2.Size = new System.Drawing.Size(173, 37);
             this.label2.TabIndex = 4;
             this.label2.Text = "Complexity";
             // 
@@ -113,9 +117,10 @@
             "Medium",
             "Hard",
             "Impossible"});
-            this.CountBox.Location = new System.Drawing.Point(161, 147);
+            this.CountBox.Location = new System.Drawing.Point(237, 226);
+            this.CountBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.CountBox.Name = "CountBox";
-            this.CountBox.Size = new System.Drawing.Size(121, 32);
+            this.CountBox.Size = new System.Drawing.Size(180, 41);
             this.CountBox.TabIndex = 3;
             // 
             // imageList1
@@ -130,20 +135,21 @@
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pictureBox1.BackgroundImage = global::GameWorld.Properties.Resources._0YB8H4VG7Y4;
             this.pictureBox1.Image = global::GameWorld.Properties.Resources._0YB8H4VG7Y4;
-            this.pictureBox1.Location = new System.Drawing.Point(7, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(5, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(274, 107);
+            this.pictureBox1.Size = new System.Drawing.Size(411, 165);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox2
             // 
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox2.Image = global::GameWorld.Properties.Resources.YWnMYePpkDA;
-            this.pictureBox2.Location = new System.Drawing.Point(7, 269);
+            this.pictureBox2.Location = new System.Drawing.Point(5, 414);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(274, 104);
+            this.pictureBox2.Size = new System.Drawing.Size(411, 160);
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
@@ -151,11 +157,22 @@
             // 
             this.menuBindingSource.DataSource = typeof(GameWorld.Menu);
             // 
+            // HistoryButton
+            // 
+            this.HistoryButton.Location = new System.Drawing.Point(13, 315);
+            this.HistoryButton.Name = "HistoryButton";
+            this.HistoryButton.Size = new System.Drawing.Size(92, 89);
+            this.HistoryButton.TabIndex = 7;
+            this.HistoryButton.Text = "HIstory";
+            this.HistoryButton.UseVisualStyleBackColor = true;
+            this.HistoryButton.Click += new System.EventHandler(this.HistoryButton_Click);
+            // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(285, 378);
+            this.ClientSize = new System.Drawing.Size(418, 582);
+            this.Controls.Add(this.HistoryButton);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
@@ -163,7 +180,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LenBox);
             this.Controls.Add(this.PlayButton);
-            this.MinimumSize = new System.Drawing.Size(301, 413);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(440, 605);
             this.Name = "Menu";
             this.Text = "Menu";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -185,5 +203,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button HistoryButton;
     }
 }
