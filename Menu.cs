@@ -17,13 +17,15 @@ namespace GameWorld
         public Menu()
         {
             InitializeComponent();
+            LenBox.SelectedIndex = 0;
+            CountBox.SelectedIndex = 0;
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
             int len = 0, count = 0;
             Random random = new Random();
-
+            
             if (LenBox.SelectedItem == null)
                 len = 4;
             else if ((string)LenBox.SelectedItem == "Random")
@@ -33,7 +35,7 @@ namespace GameWorld
 
             if (CountBox.SelectedItem == null)
                 count = 8;
-            switch ((string)CountBox.SelectedItem)
+            switch (CountBox.SelectedItem.ToString())
             { 
                 case "Easy":
                     count = 8;
