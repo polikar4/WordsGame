@@ -124,9 +124,10 @@ namespace GameWorld
 
         public static GameResult[] JsonsGames()
         {
+            // read all games
             string[] namefimes = Directory.GetFiles(path + "\\");
             
-
+            // sort to date
             for(int i = 0; i < namefimes.Length - 1; i++)
             {
                 for(int j = i + 1; j < namefimes.Length; j++)
@@ -140,12 +141,14 @@ namespace GameWorld
                 }
             }
 
+            // delete file all-result
             GameResult[] result;
             if (File.Exists(path_result))
                 result = new GameResult[namefimes.Length - 1];
             else
                 result = new GameResult[namefimes.Length];
 
+            // convert to class GameResult
             for (int i = 0, j = 0; i < namefimes.Length; i++) 
             {
                 if (path_result == namefimes[i])
@@ -162,11 +165,12 @@ namespace GameWorld
 
         public static void DeleteResult()
         {
+            // Delete all result game
             string[] namefimes = Directory.GetFiles(path + "\\");
             foreach(var f in namefimes)
                 File.Delete(f);
 
-            Directory.Delete(path);
+            // update interface
             Start();
         }
 

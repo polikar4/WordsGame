@@ -55,8 +55,10 @@ namespace GameWorld
 
         private void AddGameInList()
         {
+            // Get all result game
             result = SaveResult.JsonsGames();
             
+            // Add to list
             foreach(var r in result)
             {
                 string tmp = "";
@@ -77,16 +79,18 @@ namespace GameWorld
 
         private void Clean_Click(object sender, EventArgs e)
         {
+            // Delete?
             var result = MessageBox.Show("Your actions will completely clear the history of games",
                 "Clean History",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,
                 MessageBoxDefaultButton.Button2);
 
+            // Delete!
             if (result == DialogResult.Yes)
                 SaveResult.DeleteResult();
 
-
+            // Update data
             WriteStatistics();
             ResultList.Items.Clear();
             GameInfo.Text = "";

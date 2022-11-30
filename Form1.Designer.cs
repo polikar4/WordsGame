@@ -24,8 +24,6 @@ namespace GameWorld
             base.Dispose(disposing);
         }
 
-        #region Код, автоматически созданный конструктором форм Windows
-
         /// <summary>
         /// Требуемый метод для поддержки конструктора — не изменяйте 
         /// содержимое этого метода с помощью редактора кода.
@@ -146,8 +144,6 @@ namespace GameWorld
             this.ResumeLayout(false);
             this.Resize += new System.EventHandler(this.FormResize);
         }
-
-        #endregion
 
         private System.Windows.Forms.Button[,] buttons;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

@@ -23,7 +23,7 @@ namespace GameWorld
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             GameLogic.KeyUp(e.KeyCode);
-
+            Console.WriteLine(e.KeyValue);
         }
 
         private void ClickKeyboard(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace GameWorld
             table = _table;
             x = len;
             y = attempt;
-
+            
             // load all word fix len 
             StreamReader sw = new StreamReader(Application.StartupPath + "\\words" + len.ToString() + ".json");
             string json = sw.ReadToEnd();
