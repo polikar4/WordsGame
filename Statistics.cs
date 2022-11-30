@@ -7,23 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
+using Newtonsoft.Json;
+using static GameWorld.SaveResult;
 
 namespace GameWorld
 {
     public partial class Statistics : Form
     {
+        static GameResult[] result;
+
         public Statistics()
         {
             InitializeComponent();
+            WriteStatistics();
+            GameInfo.Text = "";
+        }
 
+        private void WriteStatistics()
+        {
             string text = "";
-            foreach(var g in SaveResult.GetResult().games)
+            foreach (var g in SaveResult.GetResult().games)
             {
-                text += "Lenght - " + g.len.ToString() +
-                    " win - " + g.win.ToString() +
-                    " los - " + g.los.ToString() + "\n";
+                text += "Lenght - " + g.len.ToString() + "\n" +
+                    "    win - " + g.win.ToString() + "\n" +
+                    "    los - " + g.los.ToString() + "\n";
             }
 
+            AddGameInList();
             StatisticsLabel.Text = text;
         }
 
@@ -31,6 +42,54 @@ namespace GameWorld
         {
             Program.OpenMenuForm();
             this.Close();
+        }
+
+        private void Form_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Escape) // Close Form
+            {
+                Program.OpenMenuForm();
+                this.Close();
+            }
+        }
+
+        private void AddGameInList()
+        {
+            result = SaveResult.JsonsGames();
+            
+            foreach(var r in result)
+            {
+                string tmp = "";
+                if (r.win_game)
+                    tmp += "successfully    ";
+                else
+                    tmp += "unsuccessfully  ";
+
+                tmp += r.hidden_word;
+                ResultList.Items.Add(tmp);
+            }
+        }
+
+        private void List_IndexEdit(object sender, EventArgs e)
+        {
+            GameInfo.Text = JsonConvert.SerializeObject(result[ResultList.SelectedIndex], Formatting.Indented);
+        }
+
+        private void Clean_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Your actions will completely clear the history of games",
+                "Clean History",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.Yes)
+                SaveResult.DeleteResult();
+
+
+            WriteStatistics();
+            ResultList.Items.Clear();
+            GameInfo.Text = "";
         }
     }
 }

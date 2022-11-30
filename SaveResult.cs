@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 namespace GameWorld
 {
+    
+
+
     public static class SaveResult
     {
         public struct AllGameResult
@@ -118,5 +121,54 @@ namespace GameWorld
             sw.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
             sw.Close();
         }
+
+        public static GameResult[] JsonsGames()
+        {
+            string[] namefimes = Directory.GetFiles(path + "\\");
+            
+
+            for(int i = 0; i < namefimes.Length - 1; i++)
+            {
+                for(int j = i + 1; j < namefimes.Length; j++)
+                {
+                    if(Directory.GetLastWriteTime(namefimes[i]) < Directory.GetLastWriteTime(namefimes[j]))
+                    {
+                        string tmp = namefimes[i];
+                        namefimes[i] = namefimes[j];
+                        namefimes[j] = tmp;
+                    }
+                }
+            }
+
+            GameResult[] result;
+            if (File.Exists(path_result))
+                result = new GameResult[namefimes.Length - 1];
+            else
+                result = new GameResult[namefimes.Length];
+
+            for (int i = 0, j = 0; i < namefimes.Length; i++) 
+            {
+                if (path_result == namefimes[i])
+                    continue;
+                StreamReader sr = new StreamReader(namefimes[i]);
+                string tmp = sr.ReadToEnd();
+                sr.Close();
+                result[j] = JsonConvert.DeserializeObject<GameResult>(tmp);
+                j++;
+            }
+
+            return result;
+        }
+
+        public static void DeleteResult()
+        {
+            string[] namefimes = Directory.GetFiles(path + "\\");
+            foreach(var f in namefimes)
+                File.Delete(f);
+
+            Directory.Delete(path);
+            Start();
+        }
+
     }
 }
